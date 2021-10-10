@@ -25,29 +25,29 @@ export const getCoor = city => {
     return coor
 }
 
-export const getDayOfWeek = number =>{
-let day
+export const getDayOfWeek = number => {
+    let day
     switch (number) {
         case 0:
-            day = 'Monday'
+            day = 'Mon'
             break
         case 1:
-            day = 'Tuesday'
+            day = 'Tues'
             break
         case 2:
-            day = 'Wednesday'
+            day = 'Wed'
             break
         case 3:
-            day = 'Thursday'
+            day = 'Thu'
             break
         case 4:
-            day = 'Friday'
+            day = 'Fri'
             break
         case 5:
-            day = 'Saturday'
+            day = 'Sat'
             break
         case 6:
-            day = 'Sunday'
+            day = 'Sun'
             break
         default:
             break

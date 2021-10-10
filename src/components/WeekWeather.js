@@ -6,13 +6,14 @@ export class WeekWeather extends Component {
         const { forecast } = this.props
         return (
             forecast && <div className="forecastContainer">
+
                 {forecast.map((item, index) => {
                     return (
-                        <div className="forecast-day" key={index}>
+                        <div className="forecast-dayCard" key={index}>
                             <div className="day">
                                 {getDayOfWeek(item.description)}
                             </div>
-                            <div className="image"><img className='icon2' src={`http://openweathermap.org/img/wn/${item.icon}@2x.png`} alt={'weather icon'} />
+                            <div className="image2"><img className='icon2' src={`http://openweathermap.org/img/wn/${item.icon}@2x.png`} alt={'weather icon'} />
                             </div>
                             <div className="degrees-small">
                                 {item.temp}°
