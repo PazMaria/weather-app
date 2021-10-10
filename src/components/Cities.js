@@ -5,7 +5,9 @@ export class Cities extends Component {
     selectedCity:'VICTORIA'
 }
     clickedButtonHandler = name => {
+        const {getWeather} = this.props
         this.setState({selectedCity:name})
+        getWeather(name)
     };
 
    buttons = ['VICTORIA', 'CALGARY', 'TORONTO']
@@ -15,7 +17,7 @@ export class Cities extends Component {
             <>
             {this.buttons.map((name, i)=>
                 <button key={i} name={name} onClick={() => this.clickedButtonHandler(name)} className={selectedCity === name ? 'activeButton' : ''}>{name}
-                    </button>
+                </button>
             )
             }
             </>
