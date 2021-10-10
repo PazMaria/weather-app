@@ -3,6 +3,7 @@ import './App.css';
 import Cities from './components/Cities'
 import TodayWeather from './components/TodayWeather';
 import WeekWeather from './components/WeekWeather';
+import {getCoor} from './utils'
 
 const weatherKey=process.env.REACT_APP_WEATHER_API_KEY
 
@@ -10,43 +11,29 @@ export class App extends Component {
 
   state={
     current:{temp:'', icon:null, description:''},
-    day2:{temp:'', icon:null, description:''},
-    day3:{temp:'', icon:null, description:''},
-    day4:{temp:'', icon:null, description:''},
-    day5:{temp:'', icon:null, description:''},
-  }
-
-  getCoor = city =>{
-    let coor
-    switch (city) {
-      case 'VICTORIA':
-        coor={lat: 48.4284,
-        lon: -123.3656}
-        break
-    case 'CALGARY':
-        coor={lat:51.0447,
-        lon:-114.0719}
-        break
-    case 'TORONTO':
-        coor={lat: 43.6532,
-        lon: -79.3832}
-        break
-    default:
-        break
-    }
-    return coor
+    forecast:[]
   }
   
   getWeather = async city=>{
-    const coor = this.getCoor(city)
+    const coor = getCoor(city)
     const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coor.lat}&lon=${coor.lon}&exclude=minutely,hourly,alerts&units=metric&appid=${weatherKey}`
     const response = await fetch(apiUrl)
     const data = await response.json()
-    this.setState({current:{
-    temp:Math.floor(data.current.temp),
-    icon:data.current.weather[0].icon,
-    description: data.current.weather[0].description
-}})
+    const forecast = data.daily.slice(1, 5).map((element,i) => {
+      return {
+        temp: Math.floor(element.temp.max), icon: element.weather[0].icon, description: (new Date(element.dt * 1000)).getDay()
+        
+      }
+    })
+
+    this.setState({
+      current:{
+        temp:Math.floor(data.current.temp),
+        icon:data.current.weather[0].icon,
+        description: data.current.weather[0].description
+      },
+      forecast
+})
 }
 
 componentDidMount(){
@@ -54,7 +41,7 @@ componentDidMount(){
 }
 
   render() {
-    const {current} =this.state
+    const {current, forecast} =this.state
     return (
       <div className='mainContainer'>
         <div className='cities'>
@@ -62,7 +49,7 @@ componentDidMount(){
         </div>
         <div className='weatherContainer'>
           <TodayWeather current={current}/>
-          <WeekWeather/>
+          <WeekWeather forecast={forecast} />
         </div>
       </div>
     )
