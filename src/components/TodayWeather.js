@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 
 export class TodayWeather extends Component {
     render() {
-        const { temp, icon, description } = this.props.current
+        let { current: { temp, icon, description }, error } = this.props
         return (
             <div className="todayContainer">
-                {temp && <><div className="header">Today</div>
+                {!error ? <><div className="header">Today</div>
 
                 <div className="inner-todayContainer">
                     <div className="image">
@@ -14,10 +14,15 @@ export class TodayWeather extends Component {
 
                     <div className="current-weather">
                         <div className='degrees'>{temp}°</div>
-                        <div>{description[0].toUpperCase() + description.slice(1).toLowerCase()}</div>
+                        <div>{description && description[0].toUpperCase() + description.slice(1).toLowerCase()}</div>
                     </div>
                 </div>
-                </>}
+                </>
+            :
+            <div>
+                <p style={{textAlign:'center'}}>Unable to retrieve data, try again later</p>
+            </div>    
+            }
             </div>
         )
     }

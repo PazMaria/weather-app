@@ -3,24 +3,30 @@ import { getDayOfWeek } from '../utils'
 
 export class WeekWeather extends Component {
     render() {
-        const { forecast } = this.props
+        const { forecast, error } = this.props
         return (
-            forecast && <div className="forecastContainer">
+            <div className="forecastContainer">
 
-                {forecast.map((item, index) => {
+                {!error ? forecast.map((item, index) => {
                     return (
                         <div className="forecast-dayCard" key={index}>
                             <div className="day">
                                 {getDayOfWeek(item.description)}
                             </div>
-                            <div className="image2"><img className='icon2' src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`} alt={'weather icon'} />
+                            <div className="image2">
+                                {item.icon && <img className='icon2' src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`} alt={'weather icon'} />}
                             </div>
                             <div className="degrees-small">
                                 {item.temp}°
                             </div>
                         </div>
-                    );
-                })}
+                    )
+                    })
+                    :
+                    <div className='error'>
+                        <p>Unable to retrieve data, try again later</p>
+                    </div>
+                }
             </div>
         )
     }
