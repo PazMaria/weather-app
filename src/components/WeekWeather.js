@@ -13,7 +13,7 @@ export class WeekWeather extends Component {
                             <div className="day">
                                 {getDayOfWeek(item.description)}
                             </div>
-                            <div className="image2"><img className='icon2' src={`http://openweathermap.org/img/wn/${item.icon}@2x.png`} alt={'weather icon'} />
+                            <div className="image2"><img className='icon2' src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`} alt={'weather icon'} />
                             </div>
                             <div className="degrees-small">
                                 {item.temp}°
