@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { getIcon } from '../utils'
 
 export class TodayWeather extends Component {
     render() {
@@ -9,7 +10,7 @@ export class TodayWeather extends Component {
 
                 <div className="inner-todayContainer">
                     <div className="image">
-                        {icon && <img className='icon' src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={'weather icon'} />}
+                        {icon && getIcon(icon)}
                     </div>
 
                     <div className="current-weather">

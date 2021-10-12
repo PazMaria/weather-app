@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getDayOfWeek } from '../utils'
+import { getDayOfWeek, getIcon } from '../utils'
 
 export class WeekWeather extends Component {
     render() {
@@ -14,7 +14,7 @@ export class WeekWeather extends Component {
                                 {getDayOfWeek(item.description)}
                             </div>
                             <div className="image2">
-                                {item.icon && <img className='icon2' src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`} alt={'weather icon'} />}
+                                {item.icon && getIcon(item.icon)}
                             </div>
                             <div className="degrees-small">
                                 {item.temp}°
