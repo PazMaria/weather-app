@@ -8,8 +8,9 @@ export class WeekWeather extends Component {
             <div className="forecastContainer">
 
                 {!error ? forecast.map((item, index) => {
+                    const classToUse = index === 0 ? 'forecast-dayCard left' : index === 3 ? 'forecast-dayCard right' : 'forecast-dayCard'
                     return (
-                        <div className="forecast-dayCard" key={index}>
+                        <div className={classToUse} key={index}>
                             <div className="day">
                                 {getDayOfWeek(item.description)}
                             </div>

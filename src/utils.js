@@ -73,7 +73,6 @@ export const getDayOfWeek = number => {
 
 
 export const getIcon = (code) => {
-    console.log('icon', code)
     switch (code) {
         case '01d':
             return <img className="icon" src={clear} alt={'weather icon'} />;
